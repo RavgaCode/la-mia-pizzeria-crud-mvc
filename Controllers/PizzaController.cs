@@ -2,6 +2,9 @@
 using la_mia_pizzeria.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.SqlServer.Server;
+using Microsoft.CodeAnalysis;
 
 namespace la_mia_pizzeria.Controllers
 {
@@ -16,54 +19,66 @@ namespace la_mia_pizzeria.Controllers
         public IActionResult Index()
         {
        
-           List<Pizza> pizzaList = db.Pizzas.ToList();
+           List<Pizza> pizzaList = db.Pizzas.Include("Category").ToList();
 
             return View(pizzaList);
         }
         public IActionResult Details(int id)
         {
-            Pizza singlePizza = db.Pizzas.Where(p => p.Id == id).FirstOrDefault();
+            Pizza singlePizza = db.Pizzas.Where(p => p.Id == id).Include("Category").FirstOrDefault();
 
             return View(singlePizza);
         }
         public IActionResult Create()
         {
-            return View();
+            PizzaCategories formData = new PizzaCategories();
+
+            formData.Pizza = new Pizza();
+            formData.Categories = db.Categories.ToList();
+
+            return View(formData);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Pizza newPizza)
+        public IActionResult Create(PizzaCategories formData)
         {
+            
             if (!ModelState.IsValid)
             {
-                return View();
+                formData.Categories = db.Categories.ToList();
+                return View(formData);
             }
 
-            db.Pizzas.Add(newPizza);
+            db.Pizzas.Add(formData.Pizza);
             db.SaveChanges();
 
             return RedirectToAction("Index");
         }
         public IActionResult Update(int id)
         {
-            Pizza pizzaToSearch = db.Pizzas.Where(pizzaToSearch => pizzaToSearch.Id == id).FirstOrDefault();
+            Pizza pizzaToUpdate = db.Pizzas.Where(pizzaToUpdate => pizzaToUpdate.Id == id).FirstOrDefault();
 
-            if (pizzaToSearch == null)
+            if (pizzaToUpdate == null)
                 return NotFound();
+            PizzaCategories formData = new PizzaCategories();
 
-            //return View() --> non funziona perchè non ha la memoria della post
-            return View(pizzaToSearch);
+            formData.Pizza = pizzaToUpdate;
+            formData.Categories = db.Categories.ToList();
+
+            return View(formData);
         }
         [HttpPost]
-        public IActionResult Update(Pizza pizzaToUpdate)
+        public IActionResult Update(int id, PizzaCategories formData)
         {
 
             if (!ModelState.IsValid)
             {
-                return View();
+                formData.Categories = db.Categories.ToList();
+                return View(formData);
             }
 
-            db.Pizzas.Update(pizzaToUpdate);
+            formData.Pizza.Id = id;
+            db.Pizzas.Update(formData.Pizza);
             db.SaveChanges();
 
             return RedirectToAction("Index");

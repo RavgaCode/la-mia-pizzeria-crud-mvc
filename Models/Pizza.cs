@@ -1,4 +1,4 @@
-﻿using la_mia_pizzeria.Validator;
+﻿
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,21 +9,24 @@ namespace la_mia_pizzeria.Models
         public int Id { get; set; }
         [Required(ErrorMessage = "Il campo è obbligatorio")]
         [StringLength(25)]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
 
         [Column(TypeName="text")]
         [Required(ErrorMessage = "Il campo è obbligatorio")]
-        [StringLength(100)]
-        [descriptionMinimumWords]
-        public string? Description { get; set; }
+        [StringLength(1000)]
+        //[descriptionMinimumWords]
+        public string Description { get; set; }
         [Required(ErrorMessage = "Il campo è obbligatorio")]
         [StringLength(200)]
-        public string? Image { get; set; }
+        public string Image { get; set; }
         [Required(ErrorMessage = "Il campo è obbligatorio")]
-        public double? Price { get; set; }
+        public double Price { get; set; }
 
+        //FK
 
+        public int? CategoryID { get; set; }
+        public Category Category { get; set; }
         public Pizza()
         {
 
