@@ -26,7 +26,7 @@ namespace la_mia_pizzeria.Models
         //FK
 
         public int? CategoryID { get; set; }
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
         public Pizza()
         {
 

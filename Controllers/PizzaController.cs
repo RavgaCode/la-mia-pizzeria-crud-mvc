@@ -71,13 +71,13 @@ namespace la_mia_pizzeria.Controllers
         public IActionResult Update(int id, PizzaCategories formData)
         {
 
+            formData.Pizza.Id = id;
             if (!ModelState.IsValid)
             {
                 formData.Categories = db.Categories.ToList();
                 return View(formData);
             }
 
-            formData.Pizza.Id = id;
             db.Pizzas.Update(formData.Pizza);
             db.SaveChanges();
 
