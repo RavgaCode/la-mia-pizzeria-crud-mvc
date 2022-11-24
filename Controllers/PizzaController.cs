@@ -1,10 +1,12 @@
 ﻿using la_mia_pizzeria.Data;
 using la_mia_pizzeria.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.SqlServer.Server;
 using Microsoft.CodeAnalysis;
+using Azure;
 
 namespace la_mia_pizzeria.Controllers
 {
@@ -35,6 +37,14 @@ namespace la_mia_pizzeria.Controllers
 
             formData.Pizza = new Pizza();
             formData.Categories = db.Categories.ToList();
+            formData.Ingredients = new List<SelectListItem>();
+
+            List<Ingredient> ingredientsList = db.Ingredients.ToList();
+
+            foreach (Ingredient ingredient in ingredientsList)
+            {
+                formData.Ingredients.Add(new SelectListItem(ingredient.Title, ingredient.Id.ToString()));
+            }
 
             return View(formData);
         }
@@ -46,7 +56,24 @@ namespace la_mia_pizzeria.Controllers
             if (!ModelState.IsValid)
             {
                 formData.Categories = db.Categories.ToList();
+                formData.Ingredients = new List<SelectListItem>();
+
+                List<Ingredient> ingredientsList = db.Ingredients.ToList();
+
+                foreach (Ingredient ingredient in ingredientsList)
+                {
+                    formData.Ingredients.Add(new SelectListItem(ingredient.Title, ingredient.Id.ToString()));
+                }
+
                 return View(formData);
+            }
+
+            formData.Pizza.Ingredients = new List<Ingredient>();
+
+            foreach (int ingredientId in formData.SelectedIngredients)
+            {
+                Ingredient ingredient = db.Ingredients.Where(ingredient => ingredient.Id == ingredientId).FirstOrDefault();
+                formData.Pizza.Ingredients.Add(ingredient);
             }
 
             db.Pizzas.Add(formData.Pizza);
