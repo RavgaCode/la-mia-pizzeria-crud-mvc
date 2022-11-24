@@ -1,4 +1,4 @@
-﻿@model PizzaCategories
+﻿@model PizzaForm
 
 <div class="container">
     <div class="row">
@@ -20,7 +20,7 @@
                 </div>
                 <div class="mb-3">
                     <strong>Prezzo:</strong>
-                    <input type="number" asp-for="Pizza.Price" class="d-block w-100" />
+                    <input asp-for="Pizza.Price" class="d-block w-100" />
                     <span asp-validation-for="Pizza.Price" class="text-danger"></span>
                 </div>
                 <div class="mb-3">

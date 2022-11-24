@@ -27,12 +27,24 @@ namespace la_mia_pizzeria.Models
 
         public int? CategoryID { get; set; }
         public Category? Category { get; set; }
+
+        public List<Ingredient>? Ingredients { get; set; }
         public Pizza()
         {
+            System.Globalization.CultureInfo customCulture = (System.Globalization.CultureInfo)System.Threading.Thread.CurrentThread.CurrentCulture.Clone();
+            customCulture.NumberFormat.NumberDecimalSeparator = ",";
 
+            System.Threading.Thread.CurrentThread.CurrentCulture = customCulture;
         }
         public Pizza (string name, string description, string image, double price)
         {
+
+            System.Globalization.CultureInfo customCulture = (System.Globalization.CultureInfo)System.Threading.Thread.CurrentThread.CurrentCulture.Clone();
+            customCulture.NumberFormat.NumberDecimalSeparator = ",";
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = customCulture;
+
+
             Name = name;
             Description = description;
             Image = image;

@@ -11,6 +11,10 @@
         {
 
         }
+        public Category(string name)
+        {
+            Name = name;   
+        }
     }
 }
   

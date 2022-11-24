@@ -31,7 +31,7 @@ namespace la_mia_pizzeria.Controllers
         }
         public IActionResult Create()
         {
-            PizzaCategories formData = new PizzaCategories();
+            PizzaForm formData = new PizzaForm();
 
             formData.Pizza = new Pizza();
             formData.Categories = db.Categories.ToList();
@@ -40,7 +40,7 @@ namespace la_mia_pizzeria.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(PizzaCategories formData)
+        public IActionResult Create(PizzaForm formData)
         {
             
             if (!ModelState.IsValid)
@@ -60,7 +60,7 @@ namespace la_mia_pizzeria.Controllers
 
             if (pizzaToUpdate == null)
                 return NotFound();
-            PizzaCategories formData = new PizzaCategories();
+            PizzaForm formData = new PizzaForm();
 
             formData.Pizza = pizzaToUpdate;
             formData.Categories = db.Categories.ToList();
@@ -68,7 +68,7 @@ namespace la_mia_pizzeria.Controllers
             return View(formData);
         }
         [HttpPost]
-        public IActionResult Update(int id, PizzaCategories formData)
+        public IActionResult Update(int id, PizzaForm formData)
         {
 
             formData.Pizza.Id = id;
