@@ -25,7 +25,7 @@ namespace la_mia_pizzeria.Controllers
         }
         public IActionResult Details(int id)
         {
-            Pizza singlePizza = db.Pizzas.Where(p => p.Id == id).Include("Category").FirstOrDefault();
+            Pizza singlePizza = db.Pizzas.Where(p => p.Id == id).Include("Category").Include("Ingredients").FirstOrDefault();
 
             return View(singlePizza);
         }
