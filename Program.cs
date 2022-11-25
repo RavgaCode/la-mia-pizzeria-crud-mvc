@@ -1,4 +1,8 @@
+using la_mia_pizzeria.Models.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<IDbPizzeriaRepository, DbPizzeriaRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
