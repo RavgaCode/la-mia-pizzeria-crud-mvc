@@ -48,10 +48,10 @@ namespace la_mia_pizzeria.Models.Repositories
 
             pizzaToUpdate.Ingredients = new List<Ingredient>();
 
-            //simulazione da implentare con ListTagRepository
+     
 
             IngredientsToPost(pizzaToUpdate, SelectedIngredients);
-            //fine simulazione
+   
         }
         private static void IngredientsToPost(Pizza pizza, List<int> SelectedIngredients)
         {
