@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 namespace la_mia_pizzeria.Models.Repositories
 {
-    public class InMemoryPizzaRepository : IDbPizzeriaRepository
+    public class InMemoryPizzaRepository : IPizzeriaRepository
     {
         public static List<Pizza> Pizzas = new List<Pizza>();
         public List<Pizza> All()

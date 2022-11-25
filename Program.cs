@@ -3,7 +3,7 @@ using la_mia_pizzeria.Models.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IDbPizzeriaRepository, DbPizzeriaRepository>();
+builder.Services.AddScoped<IPizzeriaRepository, InMemoryPizzaRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

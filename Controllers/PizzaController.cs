@@ -16,9 +16,9 @@ namespace la_mia_pizzeria.Controllers
     public class PizzaController : Controller
     {
         PizzaDbContext db;
-        IDbPizzeriaRepository pizzeriaRepository;
+        IPizzeriaRepository pizzeriaRepository;
 
-        public PizzaController(IDbPizzeriaRepository _pizzeriaRepository) :base()
+        public PizzaController(IPizzeriaRepository _pizzeriaRepository) :base()
         {
             db = new PizzaDbContext();
             pizzeriaRepository = _pizzeriaRepository;   

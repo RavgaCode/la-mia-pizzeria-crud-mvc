@@ -1,6 +1,6 @@
 ﻿namespace la_mia_pizzeria.Models.Repositories
 {
-    public interface IDbPizzeriaRepository
+    public interface IPizzeriaRepository
     {
         List<Pizza> All();
         Pizza GetById(int id);
