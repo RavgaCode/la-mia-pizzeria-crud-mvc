@@ -4,7 +4,7 @@ using Microsoft.SqlServer.Server;
 
 namespace la_mia_pizzeria.Models.Repositories
 {
-    public class DbPizzeriaRepository
+    public class DbPizzeriaRepository: IDbPizzeriaRepository
     {
         private PizzaDbContext db;
 
